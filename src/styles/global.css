@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #f1f5f9; /* slate-100 */
+}
+
+/* Google Sans Thai for specific components */
+.stats-card {
+    font-family: 'Noto+Sans+Thai', sans-serif;
+}
+
+.status-description-card {
+    font-family: 'Noto+Sans+Thai', sans-serif;
+}
+
+/* Toast Notification */
+#toast {
+    visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+    border-radius: 8px; padding: 16px; position: fixed; z-index: 1000; left: 50%;
+    transform: translateX(-50%); bottom: 30px; opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s, bottom 0.5s;
+}
+#toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 2000;
+    color: white;
+}
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3b82f6;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Print View Styles */
+#print-view {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.7); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+}
+.print-container {
+    width: 210mm;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2cm;
+    background: white; color: black;
+    font-family: 'Sarabun', sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.print-header { display: flex; justify-content: space-between; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+.print-title { font-size: 1.2rem; font-weight: bold; text-align: center; margin: 24px 0; }
+.print-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 11pt; }
+.print-table td { border: 1px solid #ddd; padding: 8px; vertical-align: top;}
+.print-table td:first-child { width: 150px; font-weight: bold; }
+.print-signature { display: flex; justify-content: space-between; margin-top: 50px; text-align: center; }
+.print-close-btn { margin-top: 1rem; padding: 0.5rem 1rem; color: white; border: none; cursor: pointer; border-radius: 4px; }
+
+
+@media print {
+    body * { visibility: hidden; }
+    .print-container, .print-container * { visibility: visible; }
+    #print-view {
+        position: absolute; left: 0; top: 0; width: 100%; height: auto;
+        background: none; padding: 0; margin: 0; display: block;
+    }
+    .print-container {
+        box-shadow: none; width: 100%; height: 100%;
+        padding: 0; margin: 0; max-height: none;
+    }
+    .no-print { display: none !important; }
+}
